@@ -1,6 +1,8 @@
 from setuptools import find_packages, setup
 
 setup(
+    long_description="""# Markdown supported!\n\n* Cheer\n* Celebrate\n""",
+    long_description_content_type='text/markdown',
     name='preln',
     packages=find_packages(include=['Preln']),
     version='0.1.0',
