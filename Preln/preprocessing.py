@@ -31,7 +31,7 @@ class Preprocessing:
         :rtype: str
         """
         
-        if self.debug: logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+        if self.debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
         logging.debug('> Starting preprocessing pipeline...')
         
         # Pipeline creation

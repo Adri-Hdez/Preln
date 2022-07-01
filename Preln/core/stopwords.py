@@ -15,7 +15,7 @@ def stopwords_es(text, debug):
     :type: bool
     """
     
-    if debug: logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
+    if debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
     
     text = text.split()
     print(text)
