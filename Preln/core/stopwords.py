@@ -1,8 +1,11 @@
+from tracemalloc import stop
 import pandas as pd
 import logging
+from pathlib import Path
+import csv
 
-_EXTERNAL_PATH_STP = 'Preln/_external/stopwords.csv'
-stopwords = pd.read_csv(_EXTERNAL_PATH_STP)['stopwords'].values.tolist()
+path = Path(__file__).parent / "../_external/stopwords.csv"
+stopwords = pd.read_csv(path)['stopwords'].tolist()
 
 def stopwords_es(text, debug):
     """
