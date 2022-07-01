@@ -1,2 +1,2 @@
-<p align="center"><img src="https://raw.githubusercontent.com/facebookresearch/hydra/master/website/static/img/Hydra-Readme-logo2.svg" alt="logo" width="70%" /></p>
+<p align="center"><img src="https://drive.google.com/file/d/1iCrY00KC52YVgR7NyicJgHWsy2E9TeIv/view?usp=sharing" alt="logo" width="80%" /></p>
 
