@@ -29,7 +29,7 @@ class Preprocessing:
         :rtype: str
         """
         
-        if self.debug: logging.basicConfig(level=logging.DEBUG)
+        if self.debug: logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
         logging.debug('> Starting preprocessing pipeline...')
         
         # Pipeline creation

@@ -11,7 +11,7 @@ def lowercasing(text, debug):
     :type: bool
     """
     
-    if debug: logging.basicConfig(level=logging.DEBUG)
+    if debug: logging.basicConfig(level=logging.DEBUG, format='%(levelname)s: %(message)s')
     
     text = "".join(word.lower() for word in text)
     logging.debug('-- The text is in lowercase!')
