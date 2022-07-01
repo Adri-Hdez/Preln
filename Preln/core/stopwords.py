@@ -17,11 +17,8 @@ def stopwords_es(text, debug):
     
     if debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
     
-    text = text.split()
-    print(text)
-    
-    text = [word for word in text if word not in stopwords]
-    print(text)
+    text = text.split()    
+    text = " ".join(word for word in text if word not in stopwords)
     logging.debug('-- Stopwords cleanned!')
     
     return text
