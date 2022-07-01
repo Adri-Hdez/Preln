@@ -1,5 +1,6 @@
 from .core.lowercasing import lowercasing
 from .core.punctuation import punctuation_es
+from .core.stopwords import stopwords_es
 import logging
 
 class Preprocessing:
@@ -14,10 +15,11 @@ class Preprocessing:
     :type DEBUG: bool
     """
     
-    def __init__(self, lowercasing=True, punctuation=True, debug=False):
+    def __init__(self, lowercasing=True, punctuation=True, stopwords=True, debug=False):
         self.lowecasing = lowercasing
         self.debug = debug
         self.punctuation = punctuation
+        self.stopwords = stopwords
     
     def pipeline(self, text):
         """
@@ -37,6 +39,7 @@ class Preprocessing:
         # Pipeline creation
         if self.lowecasing: text = lowercasing(text=text, debug=self.debug)
         if self.punctuation: text = punctuation_es(text=text, debug=self.debug)
+        if self.stopwords: text = stopwords_es(text=text, debug=self.debug)
         
         logging.debug('Preprocessing pipeline completed! <')
         
