@@ -1,6 +1,8 @@
+from msilib.schema import SelfReg
 from .core.lowercasing import lowercasing
 from .core.punctuation import punctuation_es
 from .core.stopwords import stopwords_es
+from .core.accents import accents
 import logging
 
 class Preprocessing:
@@ -15,7 +17,8 @@ class Preprocessing:
     :type DEBUG: bool
     """
     
-    def __init__(self, lowercasing=True, punctuation=True, stopwords=True, debug=False):
+    def __init__(self, accents=True, lowercasing=True, punctuation=True, stopwords=True, debug=False):
+        self.accents = accents
         self.lowecasing = lowercasing
         self.debug = debug
         self.punctuation = punctuation
@@ -37,6 +40,7 @@ class Preprocessing:
         logging.debug('> Starting preprocessing pipeline...')
         
         # Pipeline creation
+        if self.accents: text = accents(text=text, debug=self.debug)
         if self.lowecasing: text = lowercasing(text=text, debug=self.debug)
         if self.punctuation: text = punctuation_es(text=text, debug=self.debug)
         if self.stopwords: text = stopwords_es(text=text, debug=self.debug)
