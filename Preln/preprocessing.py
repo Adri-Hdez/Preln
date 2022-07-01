@@ -1,3 +1,6 @@
+import sys
+sys.path.append('../')
+
 from Preln.core.lowercasing import lowercasing
 import logging
 
