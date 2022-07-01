@@ -1,4 +1,3 @@
-from msilib.schema import SelfReg
 from .core.lowercasing import lowercasing
 from .core.punctuation import punctuation_es
 from .core.stopwords import stopwords_es
