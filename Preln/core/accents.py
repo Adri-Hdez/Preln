@@ -2,7 +2,7 @@ import logging
 
 def accents(text, debug):
     """
-    Method for lowercase text.
+    Method for delete accents.
     
     :param text: The text to be preprocessed
     :type: str
