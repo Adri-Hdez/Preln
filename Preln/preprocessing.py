@@ -1,4 +1,4 @@
-from Preln.Preln.core.lowercasing import lowercasing
+from .core.lowercasing import lowercasing
 import logging
 
 class Preprocessing:
