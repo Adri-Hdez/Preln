@@ -26,7 +26,7 @@ Preln is licensed under [MIT License](LICENSE).
 
 # Shields
 <p align="center">
-  <a href="https://pypi.org/project/hydra-core/">
+  <a href="https://pypi.org/project/preln/">
     <img src="https://img.shields.io/pypi/v/preln" alt="PyPI" />
   </a>
 </p>
