@@ -33,4 +33,4 @@ def accents(text, debug):
 
 
 if __name__ == '__main__':
-    accents('HÓlâ, cómo estäs? Espero què bièn', True)
+    accents()
