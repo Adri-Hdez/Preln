@@ -6,6 +6,7 @@ Preln/preprocessing.py
 Preln/core/__init__.py
 Preln/core/lowercasing.py
 Preln/core/punctuation.py
+Preln/core/stopwords.py
 preln.egg-info/PKG-INFO
 preln.egg-info/SOURCES.txt
 preln.egg-info/dependency_links.txt
