@@ -1,7 +1,7 @@
 import pandas as pd
 import logging
 
-_EXTERNAL_PATH_STP = '../_external/stopwords.csv'
+_EXTERNAL_PATH_STP = 'Preln/_external/stopwords.csv'
 stopwords = pd.read_csv(_EXTERNAL_PATH_STP)['stopwords'].values.tolist()
 
 def stopwords_es(text, debug):
