@@ -33,13 +33,13 @@ class Preprocessing:
     """
     
     def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, punctuation=True, stopwords=True, debug=False):
-        self.date = date
-        self.date_format = date_format
-        self.accents = accents
-        self.lowecasing = lowercasing
-        self.debug = debug
-        self.punctuation = punctuation
-        self.stopwords = stopwords
+        self.__date = date
+        self.__date_format = date_format
+        self.__accents = accents
+        self.__lowercasing = lowercasing
+        self.__debug = debug
+        self.__punctuation = punctuation
+        self.__stopwords = stopwords
     
     def pipeline(self, text):
         """
@@ -53,15 +53,15 @@ class Preprocessing:
         :rtype: str
         """
         
-        if self.debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
+        if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
         logging.debug('> Starting preprocessing pipeline...')
 
         # Pipeline creation
-        if self.date: text = date(text=text, type=self.date_format, debug=self.debug)
-        if self.accents: text = accents(text=text, debug=self.debug)
-        if self.lowecasing: text = lowercasing(text=text, debug=self.debug)
-        if self.punctuation: text = punctuation_es(text=text, debug=self.debug)
-        if self.stopwords: text = stopwords_es(text=text, debug=self.debug)
+        if self.__date: text = date(text=text, type=self.__date_format, debug=self.__debug)
+        if self.__accents: text = accents(text=text, debug=self.__debug)
+        if self.__lowercasing: text = lowercasing(text=text, debug=self.__debug)
+        if self.__punctuation: text = punctuation_es(text=text, debug=self.__debug)
+        if self.__stopwords: text = stopwords_es(text=text, debug=self.__debug)
         
         logging.debug('Preprocessing pipeline completed! <')
         logging.debug('')
@@ -83,14 +83,14 @@ class Preprocessing:
                   'Dentro del método de pipeline vas a poder ejecutar una secuencia de métodos que aplicaran un preprocesado a tu texto, de normal están todos activos menos el de eliminación de fechas y acentos.\n',
                   'Para activarlos simplemente ponlo como "True" -> date="True" a través de los parámetros. También podrás activar los mensajes de debug de la misma forma.')
             print('Muchas gracias por utilizar Preln en tus proyectos, cualquier comentario u opinión es de ayuda!')
-            logging.inf('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámeotros -> lang="en".')
+            logging.info('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámeotros -> lang="en".')
         if lang == 'en':
             logging.info('Welcome to the Preln package, here is some information on how it works.')
             print('At the moment Preprocessing has 2 methods, the information method (the current one) and the pipeline method.\n',
                   'Within the pipeline method you will be able to execute a sequence of methods that will apply a preprocessing to your text, normally all of them are active except the one for removing dates and accents.\n',
                   'To enable them simply set it to "True" -> date="True" via the parameters. You can also enable debug messages in the same way.')
             print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-            logging.inf('If you want to read this in another language you can change it from the parameters -> lang="en".')
+            logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')
         else:
             logging.info('Welcome to the Preln package, here is some information on how it works.')
             logging.info('Before we start, at the moment only the information is implemented in English and Spanish, apologies for that. We will show you the information in English in order to reach as many people as possible.')
@@ -98,4 +98,4 @@ class Preprocessing:
                   'Within the pipeline method you will be able to execute a sequence of methods that will apply a preprocessing to your text, normally all of them are active except the one for removing dates and accents.\n',
                   'To enable them simply set it to "True" -> date="True" via the parameters. You can also enable debug messages in the same way.')
             print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-            logging.inf('If you want to read this in another language you can change it from the parameters -> lang="en".')
+            logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')
