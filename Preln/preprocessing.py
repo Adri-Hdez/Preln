@@ -3,6 +3,7 @@ from .core.punctuation import punctuation_es
 from .core.stopwords import stopwords_es
 from .core.accents import accents
 from .core.date import date
+from .core.tokenizer import tokenizer
 import logging
 
 class Preprocessing:
@@ -32,7 +33,7 @@ class Preprocessing:
     :type DEBUG: bool
     """
     
-    def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, punctuation=True, stopwords=True, debug=False):
+    def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
         self.__date = date
         self.__date_format = date_format
         self.__accents = accents
@@ -40,6 +41,7 @@ class Preprocessing:
         self.__debug = debug
         self.__punctuation = punctuation
         self.__stopwords = stopwords
+        self.__tokenizer = tokenizer
     
     def pipeline(self, text):
         """
@@ -62,6 +64,7 @@ class Preprocessing:
         if self.__lowercasing: text = lowercasing(text=text, debug=self.__debug)
         if self.__punctuation: text = punctuation_es(text=text, debug=self.__debug)
         if self.__stopwords: text = stopwords_es(text=text, debug=self.__debug)
+        if self.__tokenizer: text = tokenizer(text=text, debug=self.__debug)
         
         logging.debug('Preprocessing pipeline completed! <')
         logging.debug('')
