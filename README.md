@@ -29,7 +29,7 @@ Preln is licensed under [MIT License](LICENSE).
   <a href="https://pypi.org/project/preln/">
     <img src="https://img.shields.io/pypi/v/preln" alt="PyPI" />
   </a>
-  <a href="https://pepy.tech/badge/preln/month">
+  <a href="https://pepy.tech/project/preln">
     <img src="https://pepy.tech/badge/preln/month" alt="downloads" />
   </a>
 </p>
