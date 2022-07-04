@@ -1,4 +1,3 @@
-from distutils.command.sdist import sdist as sdist_orig
 from setuptools import find_packages, setup
 import pathlib
 import pkg_resources
@@ -8,15 +7,6 @@ with pathlib.Path('requirements.txt').open() as txt:
         str(requirement)
         for requirement in pkg_resources.parse_requirements(txt)
     ]
-    
-class SDistCommand(sdist_orig):
-    def run(self):
-        try:
-            self.spawn(['python', '-m', 'nltk.download', 'punkt'])
-        except:
-            self.spawn(['python3', '-m', 'nltk.download', 'punkt'])
-        super().run()
-
 
 with open("README.md", "r") as fh:
     LONG_DESC = fh.read()
@@ -37,7 +27,4 @@ with open("README.md", "r") as fh:
         tests_require=['pytest'],
         test_suite='tests',
         include_package_data=True,
-        cmdclass={
-            'sdist': SDistCommand
-        }
 )
