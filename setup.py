@@ -2,11 +2,6 @@ from setuptools import find_packages, setup
 import pathlib
 import pkg_resources
 
-with pathlib.Path('requirements.txt').open() as txt:
-    install_requires = [
-        str(requirement)
-        for requirement in pkg_resources.parse_requirements(txt)
-    ]
 
 with open("README.md", "r") as fh:
     LONG_DESC = fh.read()
@@ -21,7 +16,7 @@ with open("README.md", "r") as fh:
         author='Adrián H.S & Raúl M.R',
         author_email='adrihs.dev@gmail.com',
         license='MIT',
-        install_requires=install_requires,
+        install_requires=['pandas', 'nltk', 'numpy', 'autocorrect'],
         setup_requires=['pytest-runner'],
         url='https://github.com/Adri-Hdez/Preln',
         tests_require=['pytest'],
