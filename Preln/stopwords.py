@@ -103,7 +103,7 @@ class Stopwords:
             print('La clase funciona como un manejador de stopwords, es decir, lo que podrás hacer es añadir o eliminar la/s stopwords que desees.\n',
                   'Para hacer eso, tienes que hacer uso de los métodos "append" o "delete" pasándoles una stopword(str) o stopwords(list).\n')
             print('Muchas gracias por utilizar Preln en tus proyectos, cualquier comentario u opinión es de ayuda!')
-            logging.info('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámeotros -> lang="en".')
+            logging.info('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámetros -> lang="en".')
         elif lang == 'en':
             logging.info('Welcome to the Preln library, here is some information on how the Stopwords class works.')
             print('The class works as a stopword handler, i.e. you can add or remove the stopword(s) you want.\n',
