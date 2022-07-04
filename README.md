@@ -21,6 +21,7 @@ For the correct usage, `from Preln.preprocessing import Preprocessing` this is o
 - Stopwords (class object)
 - Date formatting
 - Accents
+- Tokenizer
 
 <p><i>Implementing new methods...</i><p>
 
