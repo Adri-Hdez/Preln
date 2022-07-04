@@ -13,20 +13,21 @@ def accents(text, debug):
     
     if debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
     
-    dictionary = {'á': 'a', 'à': 'a', 'â': 'a', 'ä': 'a', 
-                  'é': 'e', 'è': 'e', 'ê': 'e', 'ë': 'e',
-                  'í': 'i', 'ì': 'i', 'î': 'i', 'ï': 'i',
-                  'ó': 'o', 'ò': 'o', 'ô': 'o', 'ö': 'o',
-                  'ú': 'u', 'ù': 'u', 'û': 'u', 'ü': 'u',
+    dictionary = {'a': ['á', 'à', 'â', 'ä'],  
+                  'e': ['é', 'è', 'ê', 'ë'],  
+                  'i': ['í', 'ì', 'î', 'ï'],  
+                  'o': ['ó', 'ò', 'ô', 'ö'],  
+                  'u': ['ú', 'ù', 'û', 'ü'],  
                   
-                  'Á': 'A', 'À': 'A', 'Â': 'A', 'Ä': 'A', 
-                  'É': 'E', 'È': 'E', 'Ê': 'E', 'Ë': 'E',
-                  'Í': 'I', 'Ì': 'I', 'Î': 'I', 'Ï': 'I',
-                  'Ó': 'O', 'Ò': 'O', 'Ô': 'O', 'Ö': 'O',
-                  'Ú': 'U', 'Ù': 'U', 'Û': 'U', 'Ü': 'U'}
-    
-    for accent, no_accent in dictionary.items():
-        text = text.replace(accent, no_accent)
+                  'A': ['Á', 'À', 'Â', 'Ä'],  
+                  'E': ['É', 'È', 'Ê', 'Ë'],  
+                  'I': ['Í', 'Ì', 'Î', 'Ï'],  
+                  'O': ['Ó', 'Ò', 'Ô', 'Ö'],  
+                  'U': ['Ú', 'Ù', 'Û', 'Ü']}  
+
+    for no_accent, accent in dictionary.items():
+        for type in accent:
+            text = text.replace(type, no_accent)
     logging.debug('-- Accent cleanned!')
 
     return text

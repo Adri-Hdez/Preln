@@ -1,7 +1,7 @@
 import logging
 import re
 
-def dow(day, month, year):
+def __dow(day, month, year):
     week = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo']
     
     year = int(year)
@@ -40,7 +40,7 @@ def date(text, type, debug):
         date_format_ = date_format.replace('-', '/')
     dmy = date_format_.split('/')
     
-    day = dow(dmy[0], dmy[1], dmy[2])
+    day = __dow(dmy[0], dmy[1], dmy[2])
     month = months[int(dmy[1]) - 1]
 
     if type == 'complete':
@@ -52,7 +52,10 @@ def date(text, type, debug):
     if type == 'month_year':
         text = text.replace(date_format, f'{month} de {dmy[2]}')
         
-    logging.debug('-- Accent cleanned!')
+    if type == 'eliminate':
+        logging.debug('-- Date eliminated!')
+    else:
+        logging.debug('-- Date formated!')
 
     return text
 
