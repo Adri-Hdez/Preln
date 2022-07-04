@@ -11,7 +11,7 @@ with open("README.md", "r") as fh:
         long_description_content_type='text/markdown',
         name='preln',
         packages=find_packages(include=['Preln', 'Preln.core']),
-        version='0.3.6',
+        version='0.3.7',
         description='A preprocessing libray for text in spanish',
         author='Adrián H.S & Raúl M.R',
         author_email='adrihs.dev@gmail.com',
