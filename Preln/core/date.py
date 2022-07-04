@@ -34,11 +34,13 @@ def date(text, type, debug):
     months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     
     date_format = ''
-    if re.findall(r'((\d{2}/\d{2}/\d{4})|(\d{2}\-\d{2}\-\d{4}))', text):
-        date_format = re.search(r'((\d{2}/\d{2}/\d{4})|(\d{2}\-\d{2}\-\d{4}))', text)
+    date_format_ = ''
+    if re.findall(r'((\d{1,2}/\d{1,2}/\d{4})|(\d{1,2}\-\d{1,2}\-\d{4}))', text):
+        date_format = re.search(r'((\d{1,2}/\d{1,2}/\d{4})|(\d{1,2}\-\d{1,2}\-\d{4}))', text)
         date_format = date_format.group(1)
         date_format_ = date_format.replace('-', '/')
     dmy = date_format_.split('/')
+    print(dmy)
     
     day = __dow(dmy[0], dmy[1], dmy[2])
     month = months[int(dmy[1]) - 1]
@@ -57,8 +59,9 @@ def date(text, type, debug):
     else:
         logging.debug('-- Date formated!')
 
+
     return text
 
 
 if __name__ == '__main__':
-    date()
+    date('Hola esto es una prueba 16/6/2022', type='complete', debug=True)
