@@ -7,6 +7,23 @@ def __dow(day, month, year):
     year = int(year)
     month = int(month)
     day = int(day)
+
+    
+    if month % 2 == 0:
+        if 1 <= month < 7:
+            if month == 2:
+                if day < 1 or day > 28: return 0
+            else:
+                if day < 1 or day > 30: return 0
+        if 7 < month <= 12:
+            if day < 1 or day > 31: return 0
+    else:
+        if 1 <= month < 7:
+            if day < 1 or day > 31: return 0
+        if month == 7:
+            if day < 1 or day > 31: return 0
+        if 7 < month <= 12:
+            if day < 1 or day > 30: return 0
     
     t = [0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4]
     if month < 3: year-= 1
@@ -35,33 +52,43 @@ def date(text, type, debug):
     
     date_format = ''
     date_format_ = ''
+    day = ''
+    month = ''
+    
     if re.findall(r'((\d{1,2}/\d{1,2}/\d{4})|(\d{1,2}\-\d{1,2}\-\d{4}))', text):
         date_format = re.search(r'((\d{1,2}/\d{1,2}/\d{4})|(\d{1,2}\-\d{1,2}\-\d{4}))', text)
         date_format = date_format.group(1)
         date_format_ = date_format.replace('-', '/')
-    dmy = date_format_.split('/')
-    print(dmy)
-    
-    day = __dow(dmy[0], dmy[1], dmy[2])
-    month = months[int(dmy[1]) - 1]
-
-    if type == 'complete':
-        text = text.replace(date_format, f'{day} {dmy[0]} de {month} de {dmy[2]}')
-    if type == 'eliminate':
-        text = text.replace(date_format, '')
-    if type == 'month':
-        text = text.replace(date_format, f'{month}')
-    if type == 'month_year':
-        text = text.replace(date_format, f'{month} de {dmy[2]}')
+        dmy = date_format_.split('/')
         
-    if type == 'eliminate':
-        logging.debug('-- Date eliminated!')
+        try:
+            day = __dow(dmy[0], dmy[1], dmy[2])
+            if day == 0: raise IndexError
+            
+            month = months[int(dmy[1]) - 1]
+            
+            if type == 'complete':
+                text = text.replace(date_format, f'{day} {dmy[0]} de {month} de {dmy[2]}')
+            if type == 'eliminate':
+                text = text.replace(date_format, '')
+            if type == 'month':
+                text = text.replace(date_format, f'{month}')
+            if type == 'month_year':
+                text = text.replace(date_format, f'{month} de {dmy[2]}')
+                
+            if type == 'eliminate':
+                logging.debug('-- Date eliminated!')
+            else:
+                logging.debug('-- Date formated!')
+        except IndexError:
+            print(f'ERROR: Date out of range: {dmy}')
+            
     else:
-        logging.debug('-- Date formated!')
+        logging.debug('-- the text doesnt has any valid date format!')
 
 
     return text
 
 
 if __name__ == '__main__':
-    date('Hola esto es una prueba 16/6/2022', type='complete', debug=True)
+    date()
