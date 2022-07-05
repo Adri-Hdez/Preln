@@ -1,7 +1,7 @@
 import logging
 import re
 
-def number_replace(text, debug):
+def numbers_cleanner(text, debug):
     """
     Method for delete numbers.
     
@@ -20,4 +20,4 @@ def number_replace(text, debug):
 
 
 if __name__ == '__main__':
-  number_replace()
+  numbers_cleanner()

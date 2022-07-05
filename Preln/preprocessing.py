@@ -1,4 +1,5 @@
 from .core.lowercasing import lowercasing
+from .core.numbers import numbers_cleanner
 from .core.punctuation import punctuation_es
 from .core.stopwords import stopwords_es
 from .core.accents import accents
@@ -22,6 +23,9 @@ class Preprocessing:
     
     :param lowercasing: Lowering the text.
     :type lowercasing: bool
+    
+    :param numbers: Delete numbers from text.
+    :type numbers: bool
 
     :param punctuation: Eliminate puntuation.
     :type punctuation: bool
@@ -33,11 +37,12 @@ class Preprocessing:
     :type DEBUG: bool
     """
     
-    def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
+    def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, numbers=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
         self.__date = date
         self.__date_format = date_format
         self.__accents = accents
         self.__lowercasing = lowercasing
+        self.__numbers = numbers
         self.__debug = debug
         self.__punctuation = punctuation
         self.__stopwords = stopwords
@@ -62,6 +67,7 @@ class Preprocessing:
         if self.__date: text = date(text=text, type=self.__date_format, debug=self.__debug)
         if self.__accents: text = accents(text=text, debug=self.__debug)
         if self.__lowercasing: text = lowercasing(text=text, debug=self.__debug)
+        if self.__numbers: text = numbers_cleanner(text=text, debug=self.__debug)
         if self.__punctuation: text = punctuation_es(text=text, debug=self.__debug)
         if self.__stopwords: text = stopwords_es(text=text, debug=self.__debug)
         if self.__tokenizer: text = tokenizer(text=text, debug=self.__debug)
