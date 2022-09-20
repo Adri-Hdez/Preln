@@ -144,8 +144,7 @@ class Preprocessing:
         logging.debug('> Creating new file...')
         
         if originalFile == None:
-            data = np.array(inputArray)
-            df = pd.DataFrame(data=data, columns='text')
+            df = pd.DataFrame(inputArray, columns=['text'])
             df.to_csv(outputFile, index=False)
         else:
             split_path = os.path.splitext(originalFile)
