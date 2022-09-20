@@ -2,3 +2,5 @@ numpy
 pandas
 nltk
 autocorrect
+lxml
+openpyxl

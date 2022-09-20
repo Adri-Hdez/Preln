@@ -1,3 +1,4 @@
+from Pipeln.pipeline import Pipeline
 from .core.lowercasing import lowercasing
 from .core.numbers import numbers_cleanner
 from .core.punctuation import punctuation_es
@@ -7,7 +8,8 @@ from .core.date import date
 from .core.tokenizer import tokenizer
 import logging
 import pandas as pd
-import csv
+import numpy as np
+import os
 
 class Preprocessing:
     """
@@ -64,7 +66,7 @@ class Preprocessing:
         
         if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
         logging.debug('> Starting preprocessing pipeline...')
-
+                
         # Pipeline creation
         if self.__date: text = date(text=text, type=self.__date_format, debug=self.__debug)
         if self.__accents: text = accents(text=text, debug=self.__debug)
@@ -79,7 +81,7 @@ class Preprocessing:
         
         return text
     
-    def pipelineFile(self, file, textCol, fileType = 'csv'):
+    def pipelineFile(self, file, textCol):
         """
         Preprocesses a given file by
         applying the different preprocessing methods
@@ -99,11 +101,14 @@ class Preprocessing:
         
         if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
         logging.debug('> Starting preprocessing pipeline...')
+        
+        split_path = os.path.splitext(file)
+        ext = split_path[1].replace('.', '')
 
-        if fileType == 'csv': df = pd.read_csv(file)
-        if fileType == 'xml': df = pd.read_xml(file)
-        if fileType == 'excel': df = pd.read_excel(file)
-        if fileType == 'json': df = pd.read_json(file)
+        if ext == 'csv': df = pd.read_csv(file)
+        if ext == 'xml': df = pd.read_xml(file)
+        if ext == 'excel': df = pd.read_excel(file)
+        if ext == 'json': df = pd.read_json(file)
         
         texts = df[textCol].values.tolist()
         array = []
@@ -117,7 +122,7 @@ class Preprocessing:
         
         return array
     
-    def write(self, inputArray, originalFile = None, fileType = 'csv', outputFile = './preprossedText.csv'):
+    def write(self, inputArray, originalFile = None, outputFile = './preprossedText.csv'):
         """
         Preprocesses a given file by
         applying the different preprocessing methods
@@ -139,18 +144,17 @@ class Preprocessing:
         logging.debug('> Creating new file...')
         
         if originalFile == None:
-            with open(outputFile, 'w', newline='', encoding='utf-8') as csvfile:
-                fieldnames = ['preprocessed_text']
-                writer = csv.writer(csvfile, fieldnames=fieldnames)
-                writer.writeheader()
-                
-                for row in inputArray:
-                    writer.writerow(row)
+            data = np.array(inputArray)
+            df = pd.DataFrame(data=data, columns='text')
+            df.to_csv(outputFile, index=False)
         else:
-            if fileType == 'csv': df = pd.read_csv(originalFile)
-            if fileType == 'xml': df = pd.read_xml(originalFile)
-            if fileType == 'excel': df = pd.read_excel(originalFile)
-            if fileType == 'json': df = pd.read_json(originalFile)
+            split_path = os.path.splitext(originalFile)
+            ext = split_path[1].replace('.', '')
+
+            if ext == 'csv': df = pd.read_csv(originalFile)
+            if ext == 'xml': df = pd.read_xml(originalFile)
+            if ext == 'excel': df = pd.read_excel(originalFile)
+            if ext == 'json': df = pd.read_json(originalFile)
 
             df['preprocessed_text'] = inputArray
             df.to_csv(originalFile, index=False)
