@@ -138,13 +138,6 @@ class Preprocessing:
         if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
         logging.debug('> Creating new file...')
         
-        if fileType == 'csv': df = pd.read_csv(originalFile)
-        if fileType == 'xml': df = pd.read_xml(originalFile)
-        if fileType == 'excel': df = pd.read_excel(originalFile)
-        if fileType == 'json': df = pd.read_json(originalFile)
-
-        df['preprocessed_text'] = inputArray
-        
         if originalFile == None:
             with open(outputFile, 'w', newline='', encoding='utf-8') as csvfile:
                 fieldnames = ['preprocessed_text']
@@ -154,13 +147,13 @@ class Preprocessing:
                 for row in inputArray:
                     writer.writerow(row)
         else:
-            with open(outputFile, 'w', newline='', encoding='utf-8') as csvfile:
-                fieldnames = df.columns
-                writer = csv.writer(csvfile, fieldnames=fieldnames)
-                writer.writeheader()
-                
-                for row in df.rows:
-                    writer.writerow(row)
+            if fileType == 'csv': df = pd.read_csv(originalFile)
+            if fileType == 'xml': df = pd.read_xml(originalFile)
+            if fileType == 'excel': df = pd.read_excel(originalFile)
+            if fileType == 'json': df = pd.read_json(originalFile)
+
+            df['preprocessed_text'] = inputArray
+            df.to_csv(originalFile, index=False)
             
         logging.debug(f' {outputFile} file created! <')
         logging.debug('')
