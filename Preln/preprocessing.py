@@ -1,4 +1,3 @@
-from Pipeln.pipeline import Pipeline
 from .core.lowercasing import lowercasing
 from .core.numbers import numbers_cleanner
 from .core.punctuation import punctuation_es
@@ -8,7 +7,6 @@ from .core.date import date
 from .core.tokenizer import tokenizer
 import logging
 import pandas as pd
-import numpy as np
 import os
 
 class Preprocessing:
