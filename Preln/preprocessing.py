@@ -6,6 +6,8 @@ from .core.accents import accents
 from .core.date import date
 from .core.tokenizer import tokenizer
 import logging
+import pandas as pd
+import csv
 
 class Preprocessing:
     """
@@ -76,6 +78,92 @@ class Preprocessing:
         logging.debug('')
         
         return text
+    
+    def pipelineFile(self, file, textCol, fileType = 'csv'):
+        """
+        Preprocesses a given file by
+        applying the different preprocessing methods
+        
+        :param file: The file to be preprocessed
+        :type file: file
+        
+        :param textCol: The text column to be preprocessed
+        :type textCol: string
+        
+        :param fileType: The type of the file
+        :type fileType: string
+        
+        :return: Preprocessed file
+        :rtype: file
+        """
+        
+        if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
+        logging.debug('> Starting preprocessing pipeline...')
+
+        if fileType == 'csv': df = pd.read_csv(file)
+        if fileType == 'xml': df = pd.read_xml(file)
+        if fileType == 'excel': df = pd.read_excel(file)
+        if fileType == 'json': df = pd.read_json(file)
+        
+        texts = df[textCol].values.tolist()
+        array = []
+
+        for text in texts: 
+            text = self.pipeline(text)   
+            array.append(text)
+        
+        logging.debug('Preprocessing pipeline completed! <')
+        logging.debug('')
+        
+        return array
+    
+    def write(self, inputArray, originalFile = None, fileType = 'csv', outputFile = './preprossedText.csv'):
+        """
+        Preprocesses a given file by
+        applying the different preprocessing methods
+        
+        :param inputArray: Input array
+        :type inputArray: array
+        
+        :param originalFile: File raw content
+        :type originalFile: file
+        
+        :param fileType: The type of the file
+        :type fileType: string
+        
+        :param outputFile: Output file
+        :type outputFile: csv
+        """
+        
+        if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
+        logging.debug('> Creating new file...')
+        
+        if fileType == 'csv': df = pd.read_csv(originalFile)
+        if fileType == 'xml': df = pd.read_xml(originalFile)
+        if fileType == 'excel': df = pd.read_excel(originalFile)
+        if fileType == 'json': df = pd.read_json(originalFile)
+
+        df['preprocessed_text'] = inputArray
+        
+        if originalFile == None:
+            with open(outputFile, 'w', newline='', encoding='utf-8') as csvfile:
+                fieldnames = ['preprocessed_text']
+                writer = csv.writer(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                
+                for row in inputArray:
+                    writer.writerow(row)
+        else:
+            with open(outputFile, 'w', newline='', encoding='utf-8') as csvfile:
+                fieldnames = df.columns
+                writer = csv.writer(csvfile, fieldnames=fieldnames)
+                writer.writeheader()
+                
+                for row in df.rows:
+                    writer.writerow(row)
+            
+        logging.debug(f' {outputFile} file created! <')
+        logging.debug('')
     
     def info(self, lang='en'):
         """
