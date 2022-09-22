@@ -3,11 +3,13 @@ from .core.numbers import numbers_cleanner
 from .core.lowercasing import lowercasing
 from .core.stopwords import stopwords_es
 from .core.tokenizer import tokenizer
+from sqlalchemy import create_engine
 from .core.accents import accents
 from distutils.log import error
 from .core.date import date
 
 import pandas as pd
+import sqlalchemy
 import logging
 import os
 
@@ -71,9 +73,9 @@ class Preprocessing:
             return text
         
         except TypeError:
-            error('¡ERROR: Given text type must be a unique string!')
-            logging.error('Preprocessing pipeline failed! <')
-            logging.error('')
+            error('ERROR: Given text type must be a unique string!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
     
    
     def filePipeline(self, filePath, key):
@@ -112,21 +114,74 @@ class Preprocessing:
             return array
         
         except UnboundLocalError:
-            error('¡ERROR: Take care with file path extension, must be one of these: .csv .xml .json .xlsx!')
-            logging.error('Preprocessing pipeline failed! <')
-            logging.error('')
+            error('ERROR: Take care with file path extension, must be one of these: .csv .xml .json .xlsx!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
         except FileNotFoundError:
-            error('¡ERROR: File path does not exists, check function arguments!')
-            logging.error('Pre-processed data file creation failed! <')
-            logging.error('')
+            error('ERROR: File path does not exists, check function arguments!')
+            logging.debug('Pre-processed data file creation failed! <')
+            logging.debug('')
         except TypeError:
-            error('¡ERROR: Given file path type must be a unique string!')
-            logging.error('Preprocessing pipeline failed! <')
-            logging.error('')
+            error('ERROR: Given file path type must be a unique string!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
         except KeyError:
-            error('¡ERROR: Given dataframe key(column) must be a unique string and must exist in the dataframe!')
-            logging.error('Preprocessing pipeline failed! <')
-            logging.error('')
+            error('ERROR: Given dataframe key(column) must be a unique string and must exist in the dataframe!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
+    
+
+    def databasePipeline(self, hostname, username, password, dbname, port, table, key):
+        """Pre-processes a SQL database by
+        applying the different preprocessing methods.
+
+        Args:
+            hostname (str): DB host name.
+            username (str): DB user name.
+            password (str): DB user password.
+            dbname (str): DB name.
+            port (str): DB port.
+            table (str): Table created in the DB.
+            key (str): Table key(column).
+
+        Returns:
+            list: A list of the contents of the pre-processed file.
+        """
+        if self.__debug: logging.basicConfig(level=logging.DEBUG, format='%(asctime)s | %(levelname)8s | %(message)s')
+        logging.debug('> Starting preprocessing pipeline...')
+        
+        try:
+            connect_info = f'mysql+pymysql://{username}:{password}@{hostname}:{port}/{dbname}?charset=utf8'
+            engine = create_engine(connect_info, pool_pre_ping=True)
+
+            # SQL Command and execution
+            sql_cmd = f"SELECT * FROM {table}"
+            df = pd.read_sql(sql=sql_cmd, con=engine)
+            
+            texts = df[key].values.tolist()
+            array = []
+            
+            for text in texts: 
+                text = self.pipeline(text)   
+                array.append(text)
+        
+            logging.debug('Preprocessing pipeline completed! <')
+            logging.debug('')
+            
+            return array
+        
+        except sqlalchemy.exc.OperationalError:
+            error('ERROR: Take care with your database info, check function arguments!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
+        except sqlalchemy.exc.ProgrammingError:
+            error('ERROR: There is a problem with your table name, it does nbt exists!')
+            logging.debug('Pre-processed data file creation failed! <')
+            logging.debug('')
+        except KeyError:
+            error('ERROR: Given dataframe key(column) must be a unique string and must exist in the dataframe!')
+            logging.debug('Preprocessing pipeline failed! <')
+            logging.debug('')
 
     
     def write(self, textList, originalFilePath = None, outputFilePath = './preprossedText.csv'):
@@ -164,24 +219,24 @@ class Preprocessing:
                     df.to_csv(outputFilePath, index=False)
                     
             except UnboundLocalError:
-                error('¡ERROR: Take care with file path extension, must be one of these: .csv .xml .json .xlsx!')
-                logging.error('Pre-processed data file creation failed! <')
-                logging.error('')
+                error('ERROR: Take care with file path extension, must be one of these: .csv .xml .json .xlsx!')
+                logging.debug('Pre-processed data file creation failed! <')
+                logging.debug('')
             except FileNotFoundError:
-                error('¡ERROR: Input/Ouput file path does not exists, check function arguments!')
-                logging.error('Pre-processed data file creation failed! <')
-                logging.error('')
+                error('ERROR: Input/Ouput file path does not exists, check function arguments!')
+                logging.debug('Pre-processed data file creation failed! <')
+                logging.debug('')
             except TypeError:
-                error('¡ERROR: Given input/output file path type must be a string!')
-                logging.error('Pre-processed data file creation failed! <')
-                logging.error('')
+                error('ERROR: Given input/output file path type must be a string!')
+                logging.debug('Pre-processed data file creation failed! <')
+                logging.debug('')
             else:     
                 logging.debug('Pre-processed data file created! <')
                 logging.debug('')
         except:
-            error('¡ERROR: Given pre-processed data must be a list!')
-            logging.error('Pre-processed data file creation failed! <')
-            logging.error('')
+            error('ERROR: Given pre-processed data must be a list!')
+            logging.debug('Pre-processed data file creation failed! <')
+            logging.debug('')
     
     def info(self, lang='en'):
         """Displays information about the library and its methods.
