@@ -15,7 +15,7 @@ import os
 
 class Preprocessing:
   """Preln main class. Preprocess a given spanish text.
-  Use pipeline() or pipelineFile() to use the package.
+  Use pipeline(), pipelineFile() or databasePipeline() to use the package.
   """
   
   def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, numbers=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
