@@ -4,3 +4,4 @@ nltk
 autocorrect
 lxml
 openpyxl
+sqlalchemy
