@@ -91,31 +91,3 @@ class Stopwords:
       error('¡ERROR: Given methods paramater type in object creation must be a string or list!')
       logging.error('Stopword/s can not be deleted! <')
       logging.error('')
-      
-  
-  def info(self, lang='en'):
-      """Displays information about the library and its methods.
-
-        Args:
-            lang (str, optional): Information language. Defaults to 'en'.
-      """
-      logging.basicConfig(level=logging.INFO, format='%(levelname)8s | %(message)s')
-      if lang == 'es':
-          logging.info('Bienvenido/a a la librería Preln, a continuación te daremos información de como funciona la clase Stopwords.')
-          print('La clase funciona como un manejador de stopwords, es decir, lo que podrás hacer es añadir o eliminar la/s stopwords que desees.\n',
-                'Para hacer eso, tienes que hacer uso de los métodos "append" o "delete" pasándoles una stopword(str) o stopwords(list).\n')
-          print('Muchas gracias por utilizar Preln en tus proyectos, cualquier comentario u opinión es de ayuda!')
-          logging.info('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámetros -> lang="en".')
-      elif lang == 'en':
-          logging.info('Welcome to the Preln library, here is some information on how the Stopwords class works.')
-          print('The class works as a stopword handler, i.e. you can add or remove the stopword(s) you want.\n',
-                'To do that, you have to make use of the "append" or "delete" methods by passing them a stopword(str) or stopwords(list).\n')
-          print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-          logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')
-      else:
-          logging.info('Welcome to the Preln library, here is some information on how the Stopwords class works.')
-          logging.info('Before we start, at the moment only the information is implemented in English and Spanish, apologies for that. We will show you the information in English in order to reach as many people as possible.')
-          print('The class works as a stopword handler, i.e. you can add or remove the stopword(s) you want.\n',
-                'To do that, you have to make use of the "append" or "delete" methods by passing them a stopword(str) or stopwords(list).\n')
-          print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-          logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')

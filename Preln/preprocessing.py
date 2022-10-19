@@ -237,33 +237,3 @@ class Preprocessing:
             error('ERROR: Given pre-processed data must be a list!')
             logging.debug('Pre-processed data file creation failed! <')
             logging.debug('')
-    
-    def info(self, lang='en'):
-        """Displays information about the library and its methods.
-
-        Args:
-            lang (str, optional): Information language. Defaults to 'en'.
-        """
-        logging.basicConfig(level=logging.INFO, format='%(levelname)8s | %(message)s')
-        if lang == 'es':
-            logging.info('Bienvenido/a a la librería Preln, a continuación te daremos información de como funciona.')
-            print('Ahora mismo Preprocessing cuenta con 4 métodos, el de información, el de pipeline, el pipeline para fichero y el de escritura en fichero.\n',
-                  'Dentro del método de pipeline vas a poder ejecutar una secuencia de métodos que aplicaran un preprocesado a tu texto, de normal están todos activos menos el de eliminación de fechas y acentos.\n',
-                  'Para activarlos simplemente ponlo como "True" -> date="True" a través de los parámetros. También podrás activar los mensajes de debug de la misma forma.')
-            print('Muchas gracias por utilizar Preln en tus proyectos, cualquier comentario u opinión es de ayuda!')
-            logging.info('Si quieres leer esto en otro idioma puedes cambiarlo desde los parámeotros -> lang="en".')
-        if lang == 'en':
-            logging.info('Welcome to the Preln package, here is some information on how it works.')
-            print('At the moment Preprocessing has 4 methods, the information method, the pipeline method, the file pipeline method and file writter.\n',
-                  'Within the pipeline method you will be able to execute a sequence of methods that will apply a preprocessing to your text, normally all of them are active except the one for removing dates and accents.\n',
-                  'To enable them simply set it to "True" -> date="True" via the parameters. You can also enable debug messages in the same way.')
-            print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-            logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')
-        else:
-            logging.info('Welcome to the Preln package, here is some information on how it works.')
-            logging.info('Before we start, at the moment only the information is implemented in English and Spanish, apologies for that. We will show you the information in English in order to reach as many people as possible.')
-            print('At the moment Preprocessing has 4 methods, the information method, the pipeline method, the file pipeline method and file writter.\n',
-                  'Within the pipeline method you will be able to execute a sequence of methods that will apply a preprocessing to your text, normally all of them are active except the one for removing dates and accents.\n',
-                  'To enable them simply set it to "True" -> date="True" via the parameters. You can also enable debug messages in the same way.')
-            print('Thank you very much for using Preln in your projects, any feedback is helpful!')
-            logging.info('If you want to read this in another language you can change it from the parameters -> lang="en".')
