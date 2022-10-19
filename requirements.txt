@@ -4,3 +4,4 @@ nltk
 lxml
 openpyxl
 sqlalchemy
+es_core_news_sm
