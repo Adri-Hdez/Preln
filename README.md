@@ -7,28 +7,68 @@
 
 ----------------------
 
-# Installation & Upgrade
+<p align="justify">
+Preln is a Python package that speeds up development and optimizes the performance of applications that require adequate data processing in the field of NLP (Natural Language Processing). This library takes into account the special characteristics of data written in Spanish. It makes data suitable and ready to use for complex applications like training machine-learning models, extracting content from social media or develop powerful tools to automate language correction, lemmatization, stemming within manny others.
+</p>
 
-- Installation: `pip install preln`
-- Upgrade: `pip install preln --upgrade`
+<p align="center">📃​ <b>Last version v0.5.0 out now!</b> 📃​</p>
 
-For the correct usage, `from Preln.preprocessing import Preprocessing` this is our principal `Object`, also you have `Stopwords` class, the methods of this class allow you to append or delete a stopword/s. For more information you can call `info()` method. Through `preprocessing` you can call `pipeline` method and apply preprocessing to text.
+# 💬​ Contribution & Questions
+| Contribution & Questions Type     | Platforms                               |
+| ------------------------------- | --------------------------------------- |
+| 🐞​​ **Bug Reports**              | [GitHub Issue Tracker]                  |
+| 📦​ **Feature Requests & Ideas** | [GitHub Discussions]                    |
+| 🛠️​ **Usage Questions & Discusions**          | [GitHub Discussions] |
 
-### Pipeline methods
+# 💼​ Features
+- Apply and combine general basic operations to pre-process text in Spanish
+- Establish direct connection with file paths, databases… for easy reading and writing data
+- Simple implementation, optimized and ready to apply configuration files
+- Autocorrect function to improve data quality
+- Lemmatization and stemming for text entries
+- Methods for privacy control, replacing or removing personal data from the dataset
+- Support for spanish and english languages
 
-- Lowercase
-- Punctuation
-- Stopwords (class object)
-- Date formatting
-- Accents
-- Tokenizer
+# ​💾​ Install Preln
 
-<p><i>Implementing new methods...</i><p>
+To start using Preln use the next command:
 
-# License
+```markdown
+pip install preln
+```
+
+Note: you might have to add this command as a “code” line in order to use Preln on a Python notebook.
+
+- [If you are using an old version of Preln, check the update guide to install the package’s new changes.](https://www.notion.so/What-s-New-6b3bbab586e54962a1473738d68d886a)
+
+The main object class of the package is called `Preprocessing` and it contains all the principal functions of the package. We will be importing this class and creating and object in order to use it’s methods:
+
+```python
+from Preln.preprocessing import Preprocessing
+
+preprocessor = Preprocessing()
+```
+
+## 🔧​ Example of use
+
+In this basic example, you can check how to use the package in order to process a simple piece of text.
+
+```python
+sample_text = "¡Hola!, mi nombre es Preln"
+
+test = preprocessor.pipeline(sample_text)
+
+print(test) # ['nombre', 'preln']
+```
+
+Note: The pipeline method has it´s parameters (which toggle the core methods) setted by default. It’s interesting to change them based on each text we want to process.
+
+- [You can check every option upon the core methods and find out what combination of them suits perfectly with your dataset](https://www.notion.so/Pipeline-77be058e7a3248e9a8107e5864665730)
+
+# 💳​ License
 Preln is licensed under [MIT License](LICENSE).
 
-# Shields
+# 🗃️ Shields
 <p align="center">
   <a href="https://pypi.org/project/preln/">
     <img src="https://img.shields.io/pypi/v/preln" alt="PyPI" />
