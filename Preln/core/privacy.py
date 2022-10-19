@@ -2,7 +2,7 @@ import logging
 import spacy
 import re
 
-CLEANDNI  = re.compile(r'[0-9]{8}[a-z] | [0-9]{8}-[a-z] | [0-9]{2}.[0-9]{3}.[0-9]{3}-[a-z]')
+CLEANDNI  = re.compile(r'[0-9]{8}[a-z] | [0-9]{8}-[a-z] | [0-9]{2}.[0-9]{3}.[0-9]{3}-[a-z] | [0-9]{2}.[0-9]{3}.[0-9]{3}[a-z] | [a-z][0-9]{7}[a-z] | [a-z][0-9]{7}-[a-z]')
 CLEANTLFN = re.compile(r'((\s\d{9})|(\s\d{3} \d{3} \d{3})|(\s\d{3}-\d{3}-\d{3})|(\s\d{1,3} \d{3}-\d{3}-\d{3})|(\s\+\d{1,3} \d{3} \d{3} \d{3}))')
 CLEANIP   = re.compile(r'(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})')
 
@@ -35,13 +35,15 @@ def privacy(text, format, debug) -> str:
       text = re.sub(CLEANTLFN, '', text)
       text = re.sub(CLEANIP, '', text)
     else:
+      
+      text = re.sub(CLEANDNI, ' <<DNI>> ', text)
+      text = re.sub(CLEANTLFN, ' <<TLFN>> ', text)
+      text = re.sub(CLEANIP, ' <<IP>> ', text)
       spacy_parser = spanish_nlp(text)
       for entity in spacy_parser.ents:
         if entity.label_ == 'PER':
           text = spacy_parser.text.replace(entity.text, '<<PERSON>>')
-      text = re.sub(CLEANDNI, ' <<DNI>> ', text)
-      text = re.sub(CLEANTLFN, ' <<TLFN>> ', text)
-      text = re.sub(CLEANIP, ' <<IP>> ', text)
+          
   if 'dni' in format:
     if 'delete' in format:
       text = re.sub(CLEANDNI, '', text)
