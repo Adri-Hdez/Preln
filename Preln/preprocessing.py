@@ -1,11 +1,14 @@
 from .core.punctuation import punctuation_es
 from .core.numbers import numbers_cleanner
+from .core.autocorrect import autocorrect
 from .core.lowercasing import lowercasing
 from .core.stopwords import stopwords_es
 from .core.tokenizer import tokenizer
 from sqlalchemy import create_engine
 from .core.accents import accents
+from .core.privacy import privacy
 from distutils.log import error
+from .core.media import media
 from .core.date import date
 
 import pandas as pd
@@ -18,7 +21,7 @@ class Preprocessing:
   Use pipeline(), pipelineFile() or databasePipeline() to use the package.
   """
   
-  def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, numbers=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
+  def __init__(self, date=False, date_format=None, accents=False, lowercasing=True, privacy=False, privacy_format='multi:delete', correction=False, media=False, media_format='multi:delete', numbers=True, punctuation=True, stopwords=True, tokenizer=True, debug=False):
     """Preprocessing class constructor. 
     Initialize and custom pre-processing pipeline.
 
@@ -37,6 +40,11 @@ class Preprocessing:
     self.__date_format = date_format
     self.__accents = accents
     self.__lowercasing = lowercasing
+    self.__privacy = privacy
+    self.__privacy_format = privacy_format
+    self.__correction = correction
+    self.__media = media
+    self.__media_format = media_format
     self.__numbers = numbers
     self.__debug = debug
     self.__punctuation = punctuation
@@ -44,7 +52,7 @@ class Preprocessing:
     self.__tokenizer = tokenizer
   
   
-  def pipeline(self, text):
+  def pipeline(self, text) -> str:
     """Pre-processes a given text by
     applying the different pre-processing methods.
 
@@ -62,6 +70,9 @@ class Preprocessing:
       if self.__date:         text = date(text=text, type=self.__date_format, debug=self.__debug)
       if self.__accents:      text = accents(text=text, debug=self.__debug)
       if self.__lowercasing:  text = lowercasing(text=text, debug=self.__debug)
+      if self.__privacy:      text = privacy(text=text, format=self.__privacy_format, debug=self.__debug)
+      if self.__correction:   text = autocorrect(text=text, debug=self.__debug)
+      if self.__media:        text = media(text=text, format=self.__media_format, debug=self.__debug)
       if self.__numbers:      text = numbers_cleanner(text=text, debug=self.__debug)
       if self.__punctuation:  text = punctuation_es(text=text, debug=self.__debug)
       if self.__stopwords:    text = stopwords_es(text=text, debug=self.__debug)
@@ -78,7 +89,7 @@ class Preprocessing:
       logging.debug('')
   
   
-  def filePipeline(self, filePath, key):
+  def filePipeline(self, filePath, key) -> list:
     """Pre-processes a given file by
     applying the different preprocessing methods.
 
@@ -131,7 +142,7 @@ class Preprocessing:
       logging.debug('')
   
 
-  def databasePipeline(self, hostname, username, password, dbname, port, table, key):
+  def databasePipeline(self, hostname, username, password, dbname, port, table, key) -> list:
     """Pre-processes a SQL database by
     applying the different preprocessing methods.
 
@@ -184,7 +195,7 @@ class Preprocessing:
       logging.debug('')
 
   
-  def write(self, textList, originalFilePath = None, outputFilePath = './preprossedText.csv'):
+  def write(self, textList, originalFilePath = None, outputFilePath = './preprossedText.csv') -> None:
     """Convert pre-processed text list to a csv file
     or override original file adding pre-processed text.
 
