@@ -11,7 +11,7 @@
 Preln is a Python package that speeds up development and optimizes the performance of applications that require adequate data processing in the field of NLP (Natural Language Processing). This library takes into account the special characteristics of data written in Spanish. It makes data suitable and ready to use for complex applications like training machine-learning models, extracting content from social media or develop powerful tools to automate language correction, lemmatization, stemming within manny others.
 </p>
 
-<p align="center">📃​ <b>Last version v0.5.0 out now!</b> 📃​</p>
+<p align="center">📃​ <b>Last version v0.5.1-alpha out now!</b> 📃​</p>
 
 # 💬​ Contribution & Questions
 | Contribution & Questions Type     | Platforms                               |
@@ -39,14 +39,17 @@ pip install preln
 
 Note: you might have to add this command as a “code” line in order to use Preln on a Python notebook.
 
-- [If you are using an old version of Preln, check the update guide to install the package’s new changes.](https://www.notion.so/What-s-New-6b3bbab586e54962a1473738d68d886a)
+- [If you are using an old version of Preln, check the update guide to install the package’s new changes.]()
 
 The main object class of the package is called `Preprocessing` and it contains all the principal functions of the package. We will be importing this class and creating and object in order to use it’s methods:
 
 ```python
 from Preln.preprocessing import Preprocessing
 
-preprocessor = Preprocessing()
+preprocessor = Preprocessing(date=False, date_format=None, accents=False, lowercasing=True,   
+               privacy=True, privacy_format="multi:replace", correction=True, media=True, 
+               media_format="mention:delete", numbers=False, punctuation=True, 
+               stopwords=True, tokenizer=True, debug=False)
 ```
 
 ## 🔧​ Example of use
@@ -54,16 +57,16 @@ preprocessor = Preprocessing()
 In this basic example, you can check how to use the package in order to process a simple piece of text.
 
 ```python
-sample_text = "¡Hola!, mi nombre es Preln"
+sample_text = "¡Hola @usuario!, mi nombre es Preln, me han creado Adrián y Raúl. Revisa mi documentación en https://www.preln.org"
 
 test = preprocessor.pipeline(sample_text)
 
-print(test) # ['nombre', 'preln']
+print(test) # ['MENTION', 'nombre', 'ORG', 'creado', 'PERSON', 'PERSON', 'revisa', 'documentación', 'URL']
 ```
 
 Note: The pipeline method has it´s parameters (which toggle the core methods) setted by default. It’s interesting to change them based on each text we want to process.
 
-- [You can check every option upon the core methods and find out what combination of them suits perfectly with your dataset](https://www.notion.so/Pipeline-77be058e7a3248e9a8107e5864665730)
+- [You can check every option upon the core methods and find out what combination of them suits perfectly with your dataset]()
 
 # 💳​ License
 Preln is licensed under [MIT License](LICENSE).
@@ -75,5 +78,8 @@ Preln is licensed under [MIT License](LICENSE).
   </a>
   <a href="https://pepy.tech/project/preln">
     <img src="https://pepy.tech/badge/preln/month" alt="downloads" />
+  </a>
+  <a href="https://github.com/psf/black">
+    <img src="https://img.shields.io/badge/code%20style-black-000000.svg" alt="code_format" />
   </a>
 </p>
