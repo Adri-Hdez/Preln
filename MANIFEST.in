@@ -1,1 +1,2 @@
 include Preln/_external/stopwords.csv
+include Preln/_external/corpus.txt
