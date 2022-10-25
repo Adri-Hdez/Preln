@@ -25,7 +25,6 @@ Preln is a Python package that speeds up development and optimizes the performan
 - Establish direct connection with file paths, databases… for easy reading and writing data
 - Simple implementation, optimized and ready to apply configuration files
 - Autocorrect function to improve data quality
-- Lemmatization and stemming for text entries
 - Methods for privacy control, replacing or removing personal data from the dataset
 - Support for spanish and english languages
 
