@@ -7,7 +7,7 @@ def words(text):
     return re.findall(r"\w+", text.lower())
 
 
-path = Path(__file__).parent / "../../_external/corpus.txt"
+path = Path(__file__).parent.parent.parent / "./_external/corpus.txt"
 WORDS = Counter(words(open(path).read()))
 
 
