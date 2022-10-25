@@ -8,7 +8,7 @@ def words(text):
 
 
 path = Path(__file__).parent.parent.parent / "./_external/corpus.txt"
-WORDS = Counter(words(open(path).read()))
+WORDS = Counter(words(open(path, encoding="utf8").read()))
 
 
 def PROB(word, N=sum(WORDS.values())):
