@@ -1,4 +1,4 @@
-<p align="center"><img src="https://github.com/Adri-Hdez/Preln/blob/main/static/img/logo.svg" alt="logo" width="80%" /></p>
+<p align="center"><img src="https://github.com/Adri-Hdez/Preln/blob/main/static/img/logo.png" alt="logo" width="80%" /></p>
 
 <p align="center">
  <i>A package for preprocessing text in spanish</i>
