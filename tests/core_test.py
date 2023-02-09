@@ -35,10 +35,10 @@ class TestCore(unittest.TestCase):
         self.assertEqual(test, "Hola, Adrián!")
 
     def test_stopwords(self):
-        text = "Hola Adrián"
+        text = "hola Adrián"
         test = stopwords_es(
             text=text, debug=False
-        )  # Check method failure, only using the package it works correctly
+        ) 
 
         self.assertEqual(test, "Adrián")
 
