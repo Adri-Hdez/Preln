@@ -17,6 +17,10 @@ class TestPreprocessing(unittest.TestCase):
         test = preprocessor.filePipeline(path, "Welcome")
         self.assertEqual(test, [["adrian"]])
 
+    def test_databasePipeline(self):
+        # This test cannot be done because write method is not returnable
+        pass
+
     def test_write(self):
         # This test cannot be done because write method is not returnable
         pass
