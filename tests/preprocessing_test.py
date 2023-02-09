@@ -1,5 +1,6 @@
 from Preln.preprocessing import Preprocessing
 import unittest
+from pathlib import Path
 
 # ----------------------------------- Preprocessing testing units -----------------------------------
 class TestPreprocessing(unittest.TestCase):
@@ -12,8 +13,8 @@ class TestPreprocessing(unittest.TestCase):
 
     def test_filePipeline(self):
         preprocessor = Preprocessing(accents=True)
-        test = preprocessor.filePipeline("./__testsDatafiles/sample.csv", "Welcome")
-
+        path = Path(__file__).parent / "./__testsDatafiles/sample.csv"
+        test = preprocessor.filePipeline(path, "Welcome")
         self.assertEqual(test, [["adrian"]])
 
     def test_write(self):
