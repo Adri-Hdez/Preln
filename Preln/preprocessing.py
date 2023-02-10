@@ -25,7 +25,6 @@ class Preprocessing:
     def __init__(
         self,
         date=False,
-        date_format=None,
         accents=False,
         lowercasing=True,
         privacy=False,
@@ -54,7 +53,6 @@ class Preprocessing:
           debug (bool, optional): Displays the code execution log by console. Defaults to False.
         """
         self.__date = date
-        self.__date_format = date_format
         self.__accents = accents
         self.__lowercasing = lowercasing
         self.__privacy = privacy
@@ -87,7 +85,7 @@ class Preprocessing:
         # Preprocessing pipeline creation
         try:
             if self.__date:
-                text = date(text=text, type=self.__date_format, debug=self.__debug)
+                text = date(text=text, type=self.__date, debug=self.__debug)
             if self.__accents:
                 text = accents(text=text, debug=self.__debug)
             if self.__lowercasing:
