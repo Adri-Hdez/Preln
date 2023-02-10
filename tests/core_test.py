@@ -5,6 +5,7 @@ from Preln.preprocessing import (
     numbers_cleanner,
     stopwords_es,
     date,
+    tokenizer,
 )
 import unittest
 
@@ -36,9 +37,7 @@ class TestCore(unittest.TestCase):
 
     def test_stopwords(self):
         text = "hola Adrián"
-        test = stopwords_es(
-            text=text, debug=False
-        ) 
+        test = stopwords_es(text=text, debug=False) 
 
         self.assertEqual(test, "Adrián")
 
@@ -47,6 +46,12 @@ class TestCore(unittest.TestCase):
         test = date(text=text, type="month", debug=False)
 
         self.assertEqual(test, "Enero")
+    
+    def test_tokenizer(self):
+        text = "Hola, Adrián"
+        test = tokenizer(text=text, debug=False)
+
+        self.assertEqual(test, ["Hola",",","Adrián"])
 
 
 if __name__ == "__main__":
