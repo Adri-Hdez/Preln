@@ -17,6 +17,32 @@ class TestCore(unittest.TestCase):
 
         self.assertEqual(test, "Hola, Adrian!")
 
+    def test_date(self):
+        text = "14-01-2020"
+        test = date(text=text, type=False, debug=False)
+
+        self.assertEqual(test, "14-01-2020")
+
+        text = "14-01-2020"
+        test = date(text=text, type="complete", debug=False)
+
+        self.assertEqual(test, "Miércoles 14 de Enero de 2020")
+
+        text = "14-01-2020"
+        test = date(text=text, type="eliminate", debug=False)
+
+        self.assertEqual(test, "")
+
+        text = "14-01-2020"
+        test = date(text=text, type="month", debug=False)
+
+        self.assertEqual(test, "Enero")
+
+        text = "14-01-2020"
+        test = date(text=text, type="month_year", debug=False)
+
+        self.assertEqual(test, "Enero de 2020")
+
     def test_lowercasing(self):
         text = "Hola, Adrián!"
         test = lowercasing(text=text, debug=False)
@@ -40,12 +66,6 @@ class TestCore(unittest.TestCase):
         test = stopwords_es(text=text, debug=False) 
 
         self.assertEqual(test, "Adrián")
-
-    def test_date(self):
-        text = "14-01-2020"
-        test = date(text=text, type="month", debug=False)
-
-        self.assertEqual(test, "Enero")
     
     def test_tokenizer(self):
         text = "Hola, Adrián"
