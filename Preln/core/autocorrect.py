@@ -1,6 +1,7 @@
-from .__features.lev_distance import correction
 import logging
 
+from symspellpy.symspellpy import SymSpell
+from pathlib import Path
 
 def autocorrect(text, debug):
     """
@@ -18,18 +19,17 @@ def autocorrect(text, debug):
             level=logging.DEBUG, format="%(asctime)s | %(levelname)8s | %(message)s"
         )
 
-    text = text.split()
-    texts = []
+    path = Path(__file__).parent.parent / "./_external/dict/es-100l.txt"
 
-    for word in text:
-        word_corrected = correction(word)
-        texts.append(word_corrected)
+    sym_spell = SymSpell()
 
-    texts = " ".join(texts)
-    logging.debug("-- Text corrected!")
+    sym_spell.load_dictionary(path,0,1)
 
-    return texts
+    suggestion = sym_spell.word_segmentation(text)
+    return suggestion.corrected_string
+
 
 
 if __name__ == "__main__":
-    autocorrect()
+    corregido = autocorrect("holaquétal",False)
+    print(corregido)
