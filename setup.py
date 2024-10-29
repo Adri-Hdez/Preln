@@ -1,11 +1,11 @@
 from setuptools import find_packages, setup
 
 # Read the requirements from the requirements.txt file
-with open("requirements.txt", "r") as f:
+with open("requirements.txt", "r",encoding="utf-8") as f:
     requirements = f.read().splitlines()
 
 # Read the long description from README.md
-with open("README.md", "r") as fh:
+with open("README.md", "r",encoding="utf-8") as fh:
     LONG_DESC = fh.read()
 
 setup(
