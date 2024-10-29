@@ -1,3 +1,5 @@
+import unittest
+
 from Preln.preprocessing import (
     accents,
     lowercasing,
@@ -7,7 +9,6 @@ from Preln.preprocessing import (
     date,
     tokenizer,
 )
-import unittest
 
 # ----------------------------------- Core methods testing units -----------------------------------
 class TestCore(unittest.TestCase):
