@@ -13,7 +13,7 @@ setup(
     long_description_content_type="text/markdown",
     name="preln",
     packages=find_packages(include=["Preln", "Preln.core", "Preln.core.__features"]),
-    version="0.5.8",
+    version="0.5.9",
     description="A preprocessing library for text in Spanish",
     author="Adrián H.S & Raúl M.R",
     author_email="adrihs.dev@gmail.com",
