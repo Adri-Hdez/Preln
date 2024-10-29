@@ -4,7 +4,7 @@ import nltk
 try:
     nltk.data.find("tokenizers/punkt")
 except LookupError:
-    nltk.download("punkt")
+    nltk.download()
 
 from nltk.tokenize import word_tokenize
 
